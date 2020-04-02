@@ -11,7 +11,6 @@ public class Category {
 
     private List<List<Product>> productsByRow;
 
-
     public Integer getId() {
         return id;
     }

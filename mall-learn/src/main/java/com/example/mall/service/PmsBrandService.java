@@ -1,6 +1,6 @@
-package com.example.malllearn.service;
+package com.example.mall.service;
 
-import com.example.malllearn.mbg.model.PmsBrand;
+import com.example.mall.mbg.model.PmsBrand;
 
 import java.util.List;
 

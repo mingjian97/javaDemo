@@ -28,46 +28,46 @@ public class ProductController {
     ProductService productService;
 
     @RequestMapping("admin_product_add")
-    public String add(Model model, Product p){
+    public String add(Model model, Product p) {
         p.setCreateDate(new Date());
         productService.add(p);
-        return "redirect:admin_product_list?cid="+p.getCid();
+        return "redirect:admin_product_list?cid=" + p.getCid();
     }
 
     @RequestMapping("admin_product_delete")
-    public String delete(int id){
-        Product p=productService.get(id);
+    public String delete(int id) {
+        Product p = productService.get(id);
         productService.delete(id);
-        return "redirect:admin_product_list?cid="+p.getCid();
+        return "redirect:admin_product_list?cid=" + p.getCid();
     }
 
     @RequestMapping("admin_product_edit")
-    public String edit(Model model,int id){
-        Product p=productService.get(id);
-        Category c=categoryService.get(p.getCid());
+    public String edit(Model model, int id) {
+        Product p = productService.get(id);
+        Category c = categoryService.get(p.getCid());
         p.setCategory(c);
-        model.addAttribute("p",p);
+        model.addAttribute("p", p);
         return "admin/editProduct";
     }
 
     @RequestMapping("admin_product_update")
-    public String update(Product p){
+    public String update(Product p) {
         productService.update(p);
-        return "redirect:admin_product_list?cid="+p.getCid();
+        return "redirect:admin_product_list?cid=" + p.getCid();
     }
 
     @RequestMapping("admin_product_list")
-    public String list(int cid, Model model, Page page){
-        Category c=categoryService.get(cid);
-        PageHelper.offsetPage(page.getStart(),page.getCount());
-        List<Product> ps=productService.list(cid);
-        int total=(int) new PageInfo<>(ps).getTotal();
+    public String list(int cid, Model model, Page page) {
+        Category c = categoryService.get(cid);
+        PageHelper.offsetPage(page.getStart(), page.getCount());
+        List<Product> ps = productService.list(cid);
+        int total = (int) new PageInfo<>(ps).getTotal();
         page.setTotal(total);
-        page.setParam("&cid="+cid);
+        page.setParam("&cid=" + cid);
 
-        model.addAttribute("ps",ps);
-        model.addAttribute("c",c);
-        model.addAttribute("page",page);
+        model.addAttribute("ps", ps);
+        model.addAttribute("c", c);
+        model.addAttribute("page", page);
 
         return "admin/listProduct";
 

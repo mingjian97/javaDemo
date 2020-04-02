@@ -1,4 +1,4 @@
-package com.example.malllearn.common.api;
+package com.example.mall.common.api;
 
 /**
  * @author: mingjian

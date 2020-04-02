@@ -1,4 +1,4 @@
-package com.example.malllearn.mbg;
+package com.example.mall.mbg;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -13,6 +13,7 @@ import java.util.Properties;
 /**
  * @author: mingjian
  * @create: 2020-04-01 19:13
+ * 自定义注释生成器
  */
 public class CommentGenerator extends DefaultCommentGenerator {
     private boolean addRemarkComments = false;

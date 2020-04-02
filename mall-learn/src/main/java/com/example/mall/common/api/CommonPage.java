@@ -1,4 +1,4 @@
-package com.example.malllearn.common.api;
+package com.example.mall.common.api;
 
 import com.github.pagehelper.PageInfo;
 
@@ -17,9 +17,9 @@ public class CommonPage<T> {
     private List<T> list;
 
     /*将pagehelper分页后的list转为分页信息*/
-    public static <T> CommonPage<T> restPage(List<T> list){
-        CommonPage<T> result=new CommonPage<>();
-        PageInfo<T> pageInfo=new PageInfo<>();
+    public static <T> CommonPage<T> restPage(List<T> list) {
+        CommonPage<T> result = new CommonPage<T>();
+        PageInfo<T> pageInfo = new PageInfo<T>(list);
         result.setTotalPage(pageInfo.getPages());
         result.setPageNum(pageInfo.getPageNum());
         result.setPageSize(pageInfo.getPageSize());

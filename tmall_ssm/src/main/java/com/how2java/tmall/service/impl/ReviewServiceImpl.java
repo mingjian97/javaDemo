@@ -21,6 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
     ReviewMapper reviewMapper;
     @Autowired
     UserService userService;
+
     @Override
     public void add(Review c) {
         reviewMapper.insert(c);
@@ -43,20 +44,22 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List list(int pid) {
-        ReviewExample example=new ReviewExample();
+        ReviewExample example = new ReviewExample();
         example.createCriteria().andPidEqualTo(pid);
         example.setOrderByClause("id desc");
-        List<Review> res=reviewMapper.selectByExample(example);
+        List<Review> res = reviewMapper.selectByExample(example);
         setUser(res);
         return res;
     }
-    public void setUser(List<Review> res){
-        for(Review r:res)
+
+    public void setUser(List<Review> res) {
+        for (Review r : res)
             setUser(r);
     }
-    public void setUser(Review review){
-        int uid=review.getUid();
-        User user=userService.get(uid);
+
+    public void setUser(Review review) {
+        int uid = review.getUid();
+        User user = userService.get(uid);
         review.setUser(user);
     }
 

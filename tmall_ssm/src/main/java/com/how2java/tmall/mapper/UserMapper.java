@@ -2,6 +2,7 @@ package com.how2java.tmall.mapper;
 
 import com.how2java.tmall.pojo.User;
 import com.how2java.tmall.pojo.UserExample;
+
 import java.util.List;
 
 public interface UserMapper {

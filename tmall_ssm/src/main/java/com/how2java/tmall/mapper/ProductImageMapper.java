@@ -2,6 +2,7 @@ package com.how2java.tmall.mapper;
 
 import com.how2java.tmall.pojo.ProductImage;
 import com.how2java.tmall.pojo.ProductImageExample;
+
 import java.util.List;
 
 public interface ProductImageMapper {

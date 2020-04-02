@@ -27,17 +27,18 @@ public class OrderController {
     OrderItemService orderItemService;
 
     @RequestMapping("admin_order_list")
-    public String list(Model model, Page page){
-        PageHelper.offsetPage(page.getStart(),page.getCount());
-        List<Order> os=orderService.list();
-        int total=(int) new PageInfo<>(os).getTotal();
+    public String list(Model model, Page page) {
+        PageHelper.offsetPage(page.getStart(), page.getCount());
+        List<Order> os = orderService.list();
+        int total = (int) new PageInfo<>(os).getTotal();
         page.setTotal(total);
 
         orderItemService.fill(os);
-        model.addAttribute("os",os);
-        model.addAttribute("page",page);
+        model.addAttribute("os", os);
+        model.addAttribute("page", page);
         return "admin/listOrder";
     }
+
     @RequestMapping("admin_order_delivery")
     public String delivery(Order o) {
         o.setDeliveryDate(new Date());

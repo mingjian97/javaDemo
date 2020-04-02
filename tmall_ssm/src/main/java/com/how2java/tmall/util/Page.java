@@ -9,10 +9,10 @@ public class Page {
     private int count;//每页显示个数
     private int total;//总个数
     private String param;//参数
-    private static final int defaultCount=5;
+    private static final int defaultCount = 5;
 
     public Page() {
-        count=defaultCount;
+        count = defaultCount;
     }
 
     public Page(int start, int count) {
@@ -20,32 +20,36 @@ public class Page {
         this.start = start;
         this.count = count;
     }
-    public boolean isHasPreviouse(){
-        if(start==0)return false;
-        return true;
-    }
-    public boolean isHasNext(){
-        if(start==getLast())return false;
+
+    public boolean isHasPreviouse() {
+        if (start == 0) return false;
         return true;
     }
 
-    public int getTotalPage(){
+    public boolean isHasNext() {
+        if (start == getLast()) return false;
+        return true;
+    }
+
+    public int getTotalPage() {
         int totalPage;
-        if(0==total%count)
-            totalPage=total/count;
-        else totalPage=total/count+1;
+        if (0 == total % count)
+            totalPage = total / count;
+        else totalPage = total / count + 1;
 
-        if(0==totalPage)
-            totalPage=1;
+        if (0 == totalPage)
+            totalPage = 1;
         return totalPage;
     }
-    public int getLast(){
+
+    public int getLast() {
         int last;
-        if(0==total%count)
-            last=total-count;
-        else last=total-total%count;
-        return last<0?0:last;
+        if (0 == total % count)
+            last = total - count;
+        else last = total - total % count;
+        return last < 0 ? 0 : last;
     }
+
     public int getStart() {
         return start;
     }
@@ -84,12 +88,12 @@ public class Page {
                 "start=" + start +
                 ", count=" + count +
                 ", total=" + total +
-                ",getStart()"+getStart()+
-                ",getCount()"+getCount()+
-                ",isHasPreviouse()"+isHasPreviouse()+
-                ",isHasNext()"+isHasNext()+
-                ",getTotalPage()"+getTotalPage()+
-                ",getLast()"+getLast()+
+                ",getStart()" + getStart() +
+                ",getCount()" + getCount() +
+                ",isHasPreviouse()" + isHasPreviouse() +
+                ",isHasNext()" + isHasNext() +
+                ",getTotalPage()" + getTotalPage() +
+                ",getLast()" + getLast() +
                 ", param='" + param + '\'' +
                 '}';
     }

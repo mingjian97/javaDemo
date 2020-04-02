@@ -25,17 +25,18 @@ public class OrderServiceImpl implements OrderService {
     UserService userService;
     @Autowired
     OrderItemService orderItemService;
+
     @Override
     public float add(Order c, List<OrderItem> ois) {
-        float total=0;
+        float total = 0;
         add(c);
-        if(false)
+        if (false)
             throw new RuntimeException();
 
-        for(OrderItem oi:ois){
+        for (OrderItem oi : ois) {
             oi.setOid(c.getId());
             orderItemService.update(oi);
-            total+=oi.getProduct().getPromotePrice()*oi.getNumber();
+            total += oi.getProduct().getPromotePrice() * oi.getNumber();
         }
         return total;
     }
@@ -62,27 +63,28 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List list() {
-        OrderExample example =new OrderExample();
+        OrderExample example = new OrderExample();
         example.setOrderByClause("id desc");
-        List<Order> result =orderMapper.selectByExample(example);
+        List<Order> result = orderMapper.selectByExample(example);
         setUser(result);
         return result;
     }
 
     @Override
     public List list(int uid, String excludeStatus) {
-        OrderExample example=new OrderExample();
+        OrderExample example = new OrderExample();
         example.createCriteria().andUidEqualTo(uid).andStatusNotEqualTo(excludeStatus);
         example.setOrderByClause("id desc");
         return orderMapper.selectByExample(example);
     }
 
-    public void setUser(Order o){
-        User user=userService.get(o.getUid());
+    public void setUser(Order o) {
+        User user = userService.get(o.getUid());
         o.setUser(user);
     }
-    public void setUser(List<Order> os){
-        for(Order o:os)
+
+    public void setUser(List<Order> os) {
+        for (Order o : os)
             setUser(o);
     }
 

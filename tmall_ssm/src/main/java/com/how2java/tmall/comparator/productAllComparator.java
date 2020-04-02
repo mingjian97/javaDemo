@@ -12,6 +12,6 @@ import java.util.Comparator;
 public class productAllComparator implements Comparator<Product> {
     @Override
     public int compare(Product o1, Product o2) {
-        return o2.getSaleCount()*o2.getReviewCount()-o1.getReviewCount()*o1.getSaleCount();
+        return o2.getSaleCount() * o2.getReviewCount() - o1.getReviewCount() * o1.getSaleCount();
     }
 }

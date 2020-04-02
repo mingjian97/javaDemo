@@ -18,6 +18,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Autowired
     ProductImageMapper productImageMapper;
+
     @Override
     public void add(ProductImage pi) {
         productImageMapper.insert(pi);
@@ -40,7 +41,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public List list(int pid, String type) {
-        ProductImageExample example=new ProductImageExample();
+        ProductImageExample example = new ProductImageExample();
         example.createCriteria().andPidEqualTo(pid).andTypeEqualTo(type);
         example.setOrderByClause("id desc");
         return productImageMapper.selectByExample(example);

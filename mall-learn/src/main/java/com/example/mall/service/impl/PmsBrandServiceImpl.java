@@ -1,9 +1,9 @@
-package com.example.malllearn.service.impl;
+package com.example.mall.service.impl;
 
-import com.example.malllearn.mbg.mapper.PmsBrandMapper;
-import com.example.malllearn.mbg.model.PmsBrand;
-import com.example.malllearn.mbg.model.PmsBrandExample;
-import com.example.malllearn.service.PmsBrandService;
+import com.example.mall.mbg.mapper.PmsBrandMapper;
+import com.example.mall.mbg.model.PmsBrand;
+import com.example.mall.mbg.model.PmsBrandExample;
+import com.example.mall.service.PmsBrandService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

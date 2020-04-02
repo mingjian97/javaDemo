@@ -25,11 +25,11 @@ public class PropertyValueServiceImpl implements PropertyValueService {
 
     @Override
     public void init(Product p) {
-        List<Property> pts =propertyService.list(p.getCid());
-        for(Property pt:pts){
-            PropertyValue pv=get(pt.getId(),p.getId());
-            if(null==pv){
-                pv=new PropertyValue();
+        List<Property> pts = propertyService.list(p.getCid());
+        for (Property pt : pts) {
+            PropertyValue pv = get(pt.getId(), p.getId());
+            if (null == pv) {
+                pv = new PropertyValue();
                 pv.setPid(p.getId());
                 pv.setPtid(pt.getId());
                 propertyValueMapper.insert(pv);
@@ -44,21 +44,21 @@ public class PropertyValueServiceImpl implements PropertyValueService {
 
     @Override
     public PropertyValue get(int ptid, int pid) {
-        PropertyValueExample example=new PropertyValueExample();
+        PropertyValueExample example = new PropertyValueExample();
         example.createCriteria().andPtidEqualTo(ptid).andPidEqualTo(pid);
-        List<PropertyValue> pvs=propertyValueMapper.selectByExample(example);
-        if(pvs.isEmpty())
+        List<PropertyValue> pvs = propertyValueMapper.selectByExample(example);
+        if (pvs.isEmpty())
             return null;
         return pvs.get(0);
     }
 
     @Override
     public List<PropertyValue> list(int pid) {
-        PropertyValueExample example=new PropertyValueExample();
+        PropertyValueExample example = new PropertyValueExample();
         example.createCriteria().andPidEqualTo(pid);
-        List<PropertyValue> pvs=propertyValueMapper.selectByExample(example);
-        for(PropertyValue pv:pvs){
-            Property property=propertyService.get(pv.getPtid());
+        List<PropertyValue> pvs = propertyValueMapper.selectByExample(example);
+        for (PropertyValue pv : pvs) {
+            Property property = propertyService.get(pv.getPtid());
             pv.setProperty(property);
         }
         return pvs;

@@ -27,13 +27,13 @@ public class OtherInterceptor extends HandlerInterceptorAdapter {
     /**
      * 在业务处理器处理请求之前被调用
      * 如果返回false
-     *     从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链
+     * 从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链
      * 如果返回true
-     *    执行下一个拦截器,直到所有的拦截器都执行完毕
-     *    再执行被拦截的Controller
-     *    然后进入拦截器链,
-     *    从最后一个拦截器往回执行所有的postHandle()
-     *    接着再从最后一个拦截器往回执行所有的afterCompletion()
+     * 执行下一个拦截器,直到所有的拦截器都执行完毕
+     * 再执行被拦截的Controller
+     * 然后进入拦截器链,
+     * 从最后一个拦截器往回执行所有的postHandle()
+     * 接着再从最后一个拦截器往回执行所有的afterCompletion()
      */
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
@@ -55,16 +55,16 @@ public class OtherInterceptor extends HandlerInterceptorAdapter {
 
         /*这里是获取当前的contextPath:tmall_ssm,用与放在左上角那个变形金刚，点击之后才能够跳转到首页，否则点击之后也仅仅停留在当前页面*/
         HttpSession session = request.getSession();
-        String contextPath=session.getServletContext().getContextPath();
+        String contextPath = session.getServletContext().getContextPath();
         request.getSession().setAttribute("contextPath", contextPath);
 
         /*这里是获取购物车中一共有多少数量*/
-        User user =(User)  session.getAttribute("user");
-        int  cartTotalItemNumber = 0;
-        if(null!=user) {
+        User user = (User) session.getAttribute("user");
+        int cartTotalItemNumber = 0;
+        if (null != user) {
             List<OrderItem> ois = orderItemService.listByUser(user.getId());
             for (OrderItem oi : ois) {
-                cartTotalItemNumber+=oi.getNumber();
+                cartTotalItemNumber += oi.getNumber();
             }
 
         }
@@ -74,7 +74,7 @@ public class OtherInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * 在DispatcherServlet完全处理完请求后被调用,可用于清理资源等
-     *
+     * <p>
      * 当有拦截器抛出异常时,会从当前拦截器往回执行所有的拦截器的afterCompletion()
      */
 

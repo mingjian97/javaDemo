@@ -32,7 +32,6 @@ public class Product {
 
     private int reviewCount;
 
-
     public ProductImage getFirstProductImage() {
         return firstProductImage;
     }
