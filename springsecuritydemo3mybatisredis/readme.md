@@ -1,5 +1,11 @@
-springboot+springsecurity+mybatis+JWT
-https://blog.csdn.net/zzxzzxhao/article/details/83381876
+涉及技术：
+
+​		springboot+springsecurity+mybatis+JWT
+
+参考文章：https://blog.csdn.net/zzxzzxhao/article/details/83381876
+
+### 步骤 ###
+
 一、springboot
     1.新建项目
     2.application.yml的配置
@@ -18,20 +24,18 @@ https://blog.csdn.net/zzxzzxhao/article/details/83381876
         实现AuthenticationFailureHandler接口，处理用户登录失败
         实现AuthenticationSuccessHandler接口，处理登录成功的情况
         实现LogoutSuccessHandler接口，处理退出成功
-        
         实现UserDetails实现自定义对象
-    4.权限访问控制
-    5.jwt生成token的工具类
-        JwtTokenUtil
-        JwtAuthenticationTokenFilter extends OncePerRequestFilter   
-            jwt拦截器，确保在一次请求只通过一次filter，而不需要重复执行
-    6.springsecurity核心处理
-        SelfUserDetailsService  继承UserDetailsService，用户认证的业务代码
-        相应dao层
-        相应mapper.xml
-        核心处理类
-            SpringSecurityConf extends WebSecurityConfigurerAdapter
+	4.权限访问控制
+	5.jwt生成token的工具类
+    		JwtTokenUtil
+   		 JwtAuthenticationTokenFilter extends OncePerRequestFilter   
+      	  jwt拦截器，确保在一次请求只通过一次filter，而不需要重复执行
+	6.springsecurity核心处理
+   	 SelfUserDetailsService  继承UserDetailsService，用户认证的业务代码
+  	  相应dao层
+  	  相应mapper.xml
+  	  核心处理类
+       	 SpringSecurityConf extends WebSecurityConfigurerAdapter
 
-使用postman测试接口
-http://localhost:8080/demo/login?username=admin&password=123  post 返回token封装在ResultEnum中的……
-
+​	使用postman测试接口
+​	http://localhost:8080/demo/login?username=admin&password=123  post提交 	 返回token封装在ResultEnum中的……
