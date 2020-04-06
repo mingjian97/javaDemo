@@ -3,6 +3,7 @@ package com.example.springsecuritydemo3mybatisredis.common.utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -17,6 +18,8 @@ import java.util.Map;
  * 生成jwtToken
  */
 public class JwtTokenUtil {
+    @Autowired
+    private static RedisUtil redisUtil;
     // 寻找证书文件
     private static InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("jwt.jks"); // 寻找证书文件
     private static PrivateKey privateKey = null;
@@ -41,9 +44,9 @@ public class JwtTokenUtil {
      * @param expirationSeconds 过期时间（秒）
      * @return
      */
-    public static String generateToken(String subject, int expirationSeconds) {
+    public static String generateToken(String subject, int expirationSeconds, Map<String,Object> claims) {
         return Jwts.builder()
-                .setClaims(null)
+                .setClaims(claims)
                 .setSubject(subject)
                 .setExpiration(new Date(System.currentTimeMillis() + expirationSeconds * 1000))
 //                .signWith(SignatureAlgorithm.HS512, salt) // 不使用公钥私钥
@@ -52,8 +55,6 @@ public class JwtTokenUtil {
     }
 
     /**
-     * @author: zzx
-     * @date: 2018-10-19 09:10
      * @deprecation: 解析token,获得subject中的信息
      */
     public static String parseToken(String token, String salt) {
@@ -76,13 +77,20 @@ public class JwtTokenUtil {
             claims = getTokenBody(token);
         }catch (Exception e) {
         }
-
         return claims;
     }
 
     // 是否已过期
-    public static boolean isExpiration(String token){
-        return getTokenBody(token).getExpiration().before(new Date());
+    public static boolean isExpiration(String expirationTime){
+        /*return getTokenBody(token).getExpiration().before(new Date());*/
+        //通过redis中的失效时间进行判断
+        String currentTime = DateUtil.getTime();
+        if(DateUtil.compareDate(currentTime,expirationTime)){
+            //当前时间比过期时间小，失效
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private static Claims getTokenBody(String token){

@@ -29,6 +29,16 @@ spring:
         stat:
           mergeSql: true
           showSqlMillis: 5000
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+
 #mybatis是独立节点，需要单独配置
 mybatis:
   mapper-locations:
@@ -44,3 +54,9 @@ server:
     uri-encoding: utf-8
   servlet:
     context-path: /demo
+
+token:
+  #token失效时间（不是refreshToken）(这是自定义的)(秒)
+  expirationSeconds: 300
+  #默认7天登录有效(根据业务更改)
+  validTime: 7

@@ -39,3 +39,22 @@
 
 ​	使用postman测试接口
 ​	http://localhost:8080/demo/login?username=admin&password=123  post提交 	 返回token封装在ResultEnum中的……
+
+
+
+### 后续 ###
+
+集成logback 配置logback-spring.xml
+
+集成redis
+
+* 工具类
+  * DateUtil
+  * RedisUtil
+  * AccessAddressUtil
+  * CollectionUtil
+  * StringUtil
+
+
+
+……
