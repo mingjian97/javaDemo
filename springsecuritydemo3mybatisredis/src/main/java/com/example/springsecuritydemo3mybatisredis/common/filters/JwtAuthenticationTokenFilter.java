@@ -32,7 +32,9 @@ import java.util.Map;
  */
 @Component
 @Slf4j
+
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
+
     @Value("${token.expirationSeconds}")
     private int expirationSeconds;
 
@@ -53,6 +55,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String authToken = authHeader.substring("Bearer ".length());
+
             String username = JwtTokenUtil.parseToken(authToken, "_secret");
             String ip = CollectionUtil.getMapValue(JwtTokenUtil.getClaims(authToken), "ip");
 
@@ -62,12 +65,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 response.getWriter().write(JSON.toJSONString(ResultVO.result(ResultEnum.TOKEN_IS_BLACKLIST, false)));
                 return;
             }
+
             //判断token是否过期
             /*
              * 过期的话，从redis中读取有效时间（比如七天登录有效），再refreshToken（根据以后业务加入，现在直接refresh）
              * 同时，已过期的token加入黑名单
              */
-
             if (redisUtil.hasKey(authToken)) {//判断redis是否有保存
                 String expirationTime = redisUtil.hget(authToken,"expirationTime").toString();
                 if (JwtTokenUtil.isExpiration(expirationTime)) {
@@ -113,6 +116,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             }
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
                 /*
                  * 加入对ip的验证
                  * 如果ip不正确，进入黑名单验证
